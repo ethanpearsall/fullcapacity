@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Full Capacity — Professional Services Operating Model</title>
+  <meta name="description" content="Full Capacity rebuilds how professional services firms operate. Application only.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════════
+       RESET & BASE
+       ═══════════════════════════════════════════════ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    ::selection {
+      background: #C9A96E;
+      color: #0A0A0A;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background: #0A0A0A;
+      color: #F5F0EB;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 18px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ═══════════════════════════════════════════════
+       TYPOGRAPHY
+       ═══════════════════════════════════════════════ */
+    h1, h2, h3 {
+      font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      line-height: 1.2;
+    }
+
+    p {
+      max-width: 65ch;
+    }
+
+    .label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #8A8A8A;
+      margin-bottom: 3rem;
+    }
+
+    /* ═══════════════════════════════════════════════
+       NAVIGATION
+       ═══════════════════════════════════════════════ */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.5s ease, padding 0.5s ease, backdrop-filter 0.5s ease;
+    }
+
+    .nav.scrolled {
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 1.2rem 3rem;
+      border-bottom: 1px solid #2A2A2A;
+    }
+
+    .nav-logo {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #C9A96E;
+      text-decoration: none;
+    }
+
+    .nav-apply {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #F5F0EB;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      padding: 0.6rem 0;
+      position: relative;
+    }
+
+    .nav-apply::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: #C9A96E;
+      transition: width 0.4s ease;
+    }
+
+    .nav-apply:hover {
+      color: #C9A96E;
+    }
+
+    .nav-apply:hover::after {
+      width: 100%;
+    }
+
+    /* ═══════════════════════════════════════════════
+       SECTIONS — SHARED
+       ═══════════════════════════════════════════════ */
+    section {
+      position: relative;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: #2A2A2A;
+    }
+
+    /* ═══════════════════════════════════════════════
+       SECTION 01 — HERO
+       ═══════════════════════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      padding: 8rem 3rem 4rem;
+    }
+
+    .hero-domain {
+      position: absolute;
+      top: 7rem;
+      left: 3rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #6A6A6A;
+    }
+
+    .hero-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #8A8A8A;
+      margin-bottom: 3rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      max-width: 14ch;
+      margin: 0 auto 2rem;
+      color: #F5F0EB;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.125rem);
+      color: #8A8A8A;
+      max-width: 58ch;
+      margin: 0 auto 4rem;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .cta-button {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #C9A96E;
+      text-decoration: none;
+      border: 1px solid #C9A96E;
+      padding: 1.1rem 3.5rem;
+      background: transparent;
+      cursor: pointer;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    .cta-button:hover {
+      background: #C9A96E;
+      color: #0A0A0A;
+    }
+
+    .hero-footer {
+      position: absolute;
+      bottom: 3.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      color: #5A5A5A;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    /* ═══════════════════════════════════════════════
+       SECTION 02 — THE PROBLEM
+       ═══════════════════════════════════════════════ */
+    .problem {
+      background: #1A1A1A;
+      padding: 10rem 0;
+    }
+
+    .problem h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      max-width: 20ch;
+      margin-bottom: 5rem;
+      color: #F5F0EB;
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+    }
+
+    .problem-item {
+      position: relative;
+      padding-top: 2rem;
+    }
+
+    .problem-item::before {
+      content: attr(data-num);
+      font-family: 'Playfair Display', serif;
+      font-size: 12px;
+      color: #C9A96E;
+      letter-spacing: 0.15em;
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+
+    .problem-item p {
+      font-size: 1rem;
+      color: #8A8A8A;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .problem-item-divider {
+      width: 2rem;
+      height: 1px;
+      background: #2A2A2A;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ═══════════════════════════════════════════════
+       SECTION 03 — THE APPROACH
+       ═══════════════════════════════════════════════ */
+    .approach {
+      padding: 10rem 0;
+      background: #0A0A0A;
+    }
+
+    .approach .section-inner {
+      text-align: center;
+    }
+
+    .approach h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      max-width: 22ch;
+      margin: 0 auto 6rem;
+      color: #F5F0EB;
+    }
+
+    .approach-steps {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5rem;
+      margin-bottom: 5rem;
+    }
+
+    .approach-step {
+      font-size: clamp(1rem, 2vw, 1.125rem);
+      color: #8A8A8A;
+      font-weight: 300;
+      line-height: 1.8;
+      max-width: 50ch;
+      position: relative;
+      padding-left: 2.5rem;
+    }
+
+    .approach-step::before {
+      content: attr(data-step);
+      position: absolute;
+      left: 0;
+      top: 0.15em;
+      font-family: 'Playfair Display', serif;
+      font-size: 12px;
+      color: #3A3A3A;
+      letter-spacing: 0.1em;
+    }
+
+    .approach-quote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+      color: #C9A96E;
+      letter-spacing: 0.02em;
+      text-transform: none;
+    }
+
+    /* ═══════════════════════════════════════════════
+       SECTION 04 — SOCIAL PROOF
+       ═══════════════════════════════════════════════ */
+    .proof {
+      background: #1A1A1A;
+      padding: 10rem 0;
+    }
+
+    .proof .section-inner {
+      text-align: center;
+    }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-bottom: 4rem;
+      margin-top: 5rem;
+    }
+
+    .proof-item {
+      padding: 3rem 1.5rem;
+    }
+
+    .proof-number {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      font-weight: 400;
+      color: #F5F0EB;
+      line-height: 1;
+      margin-bottom: 1.2rem;
+      letter-spacing: 0.05em;
+    }
+
+    .proof-desc {
+      font-size: 0.85rem;
+      color: #8A8A8A;
+      font-weight: 300;
+      letter-spacing: 0.03em;
+      line-height: 1.6;
+      max-width: 26ch;
+      margin: 0 auto;
+    }
+
+    .proof-disclaimer {
+      font-size: 12px;
+      color: #5A5A5A;
+      font-weight: 300;
+    }
+
+    /* ═══════════════════════════════════════════════
+       SECTION 05 — APPLICATION GATE
+       ═══════════════════════════════════════════════ */
+    .application {
+      padding: 10rem 0;
+      background: #0A0A0A;
+    }
+
+    .application .section-inner {
+      max-width: 680px;
+    }
+
+    .application h2 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      margin-bottom: 2rem;
+      color: #F5F0EB;
+    }
+
+    .application-sub {
+      color: #8A8A8A;
+      font-weight: 300;
+      margin-bottom: 4rem;
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 55ch;
+    }
+
+    .form-group {
+      margin-bottom: 1.8rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #6A6A6A;
+      margin-bottom: 0.7rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: #141414;
+      border: 1px solid #2A2A2A;
+      color: #F5F0EB;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      padding: 1rem 1.2rem;
+      outline: none;
+      transition: border-color 0.4s ease;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      border-radius: 0;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: #3A3A3A;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #C9A96E;
+    }
+
+    .form-group select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236A6A6A' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1.2rem center;
+      padding-right: 3rem;
+    }
+
+    .form-group select option {
+      background: #141414;
+      color: #F5F0EB;
+    }
+
+    .form-group textarea {
+      resize: none;
+      height: 5.5rem;
+      line-height: 1.6;
+    }
+
+    .form-submit {
+      margin-top: 2.5rem;
+    }
+
+    .form-submit .cta-button {
+      width: 100%;
+      text-align: center;
+      padding: 1.2rem 3rem;
+      border: 1px solid #C9A96E;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+    }
+
+    .form-disclaimer {
+      margin-top: 2.5rem;
+      font-size: 12px;
+      color: #5A5A5A;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 4rem 0;
+    }
+
+    .form-success.active {
+      display: block;
+    }
+
+    .form-success h3 {
+      font-size: clamp(1.4rem, 3vw, 1.8rem);
+      margin-bottom: 1.5rem;
+      color: #F5F0EB;
+    }
+
+    .form-success p {
+      color: #8A8A8A;
+      font-weight: 300;
+      max-width: 45ch;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* ═══════════════════════════════════════════════
+       SECTION 06 — FOOTER
+       ═══════════════════════════════════════════════ */
+    .footer {
+      padding: 6rem 0;
+      text-align: center;
+      border-top: 1px solid #2A2A2A;
+    }
+
+    .footer-domain {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #5A5A5A;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: #3A3A3A;
+      font-weight: 300;
+      letter-spacing: 0.03em;
+    }
+
+    /* ═══════════════════════════════════════════════
+       RESPONSIVE
+       ═══════════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .problem-grid {
+        grid-template-columns: 1fr;
+        gap: 3.5rem;
+      }
+
+      .proof-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .proof-item {
+        padding: 2rem 1rem;
+      }
+
+      .proof-item:not(:last-child) {
+        border-bottom: 1px solid #2A2A2A;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav {
+        padding: 1.5rem 2rem;
+      }
+
+      .nav.scrolled {
+        padding: 1rem 2rem;
+      }
+
+      .hero {
+        padding: 7rem 2rem 4rem;
+      }
+
+      .hero-domain {
+        top: 6rem;
+        left: 2rem;
+      }
+
+      .section-inner {
+        padding: 0 2rem;
+      }
+
+      .problem,
+      .approach,
+      .proof,
+      .application {
+        padding: 7rem 0;
+      }
+
+      .approach-step {
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav {
+        padding: 1.2rem 1.5rem;
+      }
+
+      .nav.scrolled {
+        padding: 1rem 1.5rem;
+      }
+
+      .hero {
+        padding: 6rem 1.5rem 3.5rem;
+      }
+
+      .hero-domain {
+        top: 5.5rem;
+        left: 1.5rem;
+        font-size: 9px;
+      }
+
+      .hero-footer {
+        font-size: 11px;
+        bottom: 2.5rem;
+      }
+
+      .section-inner {
+        padding: 0 1.5rem;
+      }
+
+      .problem,
+      .approach,
+      .proof,
+      .application {
+        padding: 5.5rem 0;
+      }
+
+      .cta-button {
+        padding: 1rem 2.5rem;
+        font-size: 10px;
+      }
+
+      .label {
+        font-size: 10px;
+        margin-bottom: 2rem;
+      }
+
+      .hero-label {
+        font-size: 10px;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════
+       STAGGER REVEAL DELAYS
+       ═══════════════════════════════════════════════ */
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+    .reveal-delay-6 { transition-delay: 0.6s; }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════
+       NAVIGATION
+       ═══════════════════════════════════════════════ -->
+  <nav class="nav" id="nav">
+    <a href="#" class="nav-logo">Full Capacity</a>
+    <a href="#application" class="nav-apply">Apply</a>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 01 — HERO
+       ═══════════════════════════════════════════════ -->
+  <section class="hero" id="hero">
+    <span class="hero-domain reveal reveal-delay-1">fullcapacity.io</span>
+    <div class="hero-label reveal reveal-delay-2">Professional Services</div>
+    <h1 class="reveal reveal-delay-3">Your firm has a ceiling. We remove it.</h1>
+    <p class="hero-sub reveal reveal-delay-4">Full Capacity rebuilds how professional services firms operate&thinsp;&mdash;&thinsp;so every partner, every hour, and every operating model performs at maximum.</p>
+    <a href="#application" class="cta-button reveal reveal-delay-5">Apply for Access</a>
+    <div class="hero-footer reveal reveal-delay-6">We work with twelve firms at a time.</div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 02 — THE PROBLEM
+       ═══════════════════════════════════════════════ -->
+  <section class="problem" id="problem">
+    <div class="section-inner">
+      <div class="label reveal">The Reality</div>
+      <h2 class="reveal reveal-delay-1">Most firms are operating at 60% of their ceiling.</h2>
+      <div class="problem-grid">
+        <div class="problem-item reveal reveal-delay-2" data-num="01">
+          <div class="problem-item-divider"></div>
+          <p>Your best people are buried in process, not performance.</p>
+        </div>
+        <div class="problem-item reveal reveal-delay-3" data-num="02">
+          <div class="problem-item-divider"></div>
+          <p>Every month inefficiency compounds silently.</p>
+        </div>
+        <div class="problem-item reveal reveal-delay-4" data-num="03">
+          <div class="problem-item-divider"></div>
+          <p>Your competitors are not standing still.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 03 — THE APPROACH
+       ═══════════════════════════════════════════════ -->
+  <section class="approach" id="approach">
+    <div class="section-inner">
+      <div class="label reveal">What We Do</div>
+      <h2 class="reveal reveal-delay-1">We rebuild the operating model. Nothing more.</h2>
+      <div class="approach-steps">
+        <div class="approach-step reveal reveal-delay-2" data-step="01">We map every inefficiency inside your firm.</div>
+        <div class="approach-step reveal reveal-delay-3" data-step="02">We rebuild how your firm operates from the ground up.</div>
+        <div class="approach-step reveal reveal-delay-4" data-step="03">Your firm runs at full capacity. Permanently.</div>
+      </div>
+      <div class="approach-quote reveal reveal-delay-5">We do not consult. We rebuild.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 04 — SOCIAL PROOF
+       ═══════════════════════════════════════════════ -->
+  <section class="proof" id="proof">
+    <div class="section-inner">
+      <div class="label reveal">Results</div>
+      <div class="proof-grid">
+        <div class="proof-item reveal reveal-delay-1">
+          <div class="proof-number">40%</div>
+          <div class="proof-desc">Average reduction in partner admin time</div>
+        </div>
+        <div class="proof-item reveal reveal-delay-2">
+          <div class="proof-number">3 weeks</div>
+          <div class="proof-desc">Average time to full deployment</div>
+        </div>
+        <div class="proof-item reveal reveal-delay-3">
+          <div class="proof-number">12</div>
+          <div class="proof-desc">Firms we work with at any one time</div>
+        </div>
+      </div>
+      <p class="proof-disclaimer reveal reveal-delay-4">Results vary by firm size and complexity.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 05 — APPLICATION GATE
+       ═══════════════════════════════════════════════ -->
+  <section class="application" id="application">
+    <div class="section-inner">
+      <div class="label reveal">Access</div>
+      <h2 class="reveal reveal-delay-1">Is your firm ready to operate at full capacity?</h2>
+      <p class="application-sub reveal reveal-delay-2">We evaluate every application personally. If your firm qualifies, we will be in touch within 48 hours.</p>
+
+      <form id="applicationForm" class="reveal reveal-delay-3" autocomplete="off" novalidate>
+        <div class="form-group">
+          <label for="firmName">Firm Name</label>
+          <input type="text" id="firmName" name="firmName" placeholder="Your firm" required>
+        </div>
+
+        <div class="form-group">
+          <label for="yourName">Your Name</label>
+          <input type="text" id="yourName" name="yourName" placeholder="Full name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="yourRole">Your Role</label>
+          <select id="yourRole" name="yourRole" required>
+            <option value="" disabled selected>Select your role</option>
+            <option value="Managing Partner">Managing Partner</option>
+            <option value="Partner">Partner</option>
+            <option value="COO">COO</option>
+            <option value="CEO">CEO</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="firmSize">Firm Size</label>
+          <select id="firmSize" name="firmSize" required>
+            <option value="" disabled selected>Select firm size</option>
+            <option value="10-25">10&ndash;25 people</option>
+            <option value="26-50">26&ndash;50 people</option>
+            <option value="51-100">51&ndash;100 people</option>
+            <option value="100+">100+ people</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="interest">What prompted your interest?</label>
+          <textarea id="interest" name="interest" rows="3" placeholder="Tell us briefly"></textarea>
+        </div>
+
+        <div class="form-submit">
+          <button type="submit" class="cta-button">Submit Application</button>
+        </div>
+
+        <p class="form-disclaimer">Applications are reviewed within 48 hours. We work with a select number of firms at any time.</p>
+      </form>
+
+      <div class="form-success" id="formSuccess">
+        <h3>Application Received</h3>
+        <p>We will review your application and be in touch within 48 hours if your firm qualifies.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 06 — FOOTER
+       ═══════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer-domain">fullcapacity.io</div>
+    <div class="footer-copy">&copy; 2026 Full Capacity. All rights reserved.</div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════
+       JAVASCRIPT
+       ═══════════════════════════════════════════════ -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ── Navigation scroll state ────────────────── */
+      var nav = document.getElementById('nav');
+      var scrollThreshold = 60;
+
+      function updateNav() {
+        if (window.scrollY > scrollThreshold) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      }
+
+      window.addEventListener('scroll', updateNav, { passive: true });
+      updateNav();
+
+      /* ── Smooth scroll for anchor links ─────────── */
+      document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          var target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            var offset = 0;
+            var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+          }
+        });
+      });
+
+      /* ── Scroll reveal ──────────────────────────── */
+      var reveals = document.querySelectorAll('.reveal');
+
+      function checkReveal() {
+        var windowHeight = window.innerHeight;
+        var triggerPoint = windowHeight * 0.88;
+
+        reveals.forEach(function (el) {
+          var top = el.getBoundingClientRect().top;
+          if (top < triggerPoint) {
+            el.classList.add('visible');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', checkReveal, { passive: true });
+      window.addEventListener('resize', checkReveal, { passive: true });
+
+      /* Trigger initial check after brief delay for hero elements */
+      setTimeout(checkReveal, 100);
+
+      /* ── Form handling ──────────────────────────── */
+      var form = document.getElementById('applicationForm');
+      var success = document.getElementById('formSuccess');
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        /* Basic validation */
+        var firmName = document.getElementById('firmName').value.trim();
+        var yourName = document.getElementById('yourName').value.trim();
+        var yourRole = document.getElementById('yourRole').value;
+        var firmSize = document.getElementById('firmSize').value;
+
+        if (!firmName || !yourName || !yourRole || !firmSize) {
+          return;
+        }
+
+        /* Hide form, show success */
+        form.style.display = 'none';
+        success.classList.add('active');
+
+        /* Scroll success message into view */
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    })();
+  </script>
+
+</body>
+</html>
