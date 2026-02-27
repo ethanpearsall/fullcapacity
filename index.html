@@ -39,6 +39,24 @@
     }
 
     /* ═══════════════════════════════════════════════
+       FILM GRAIN OVERLAY (global texture)
+       ═══════════════════════════════════════════════ */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
+    }
+
+    /* ═══════════════════════════════════════════════
        TYPOGRAPHY
        ═══════════════════════════════════════════════ */
     h1, h2, h3 {
@@ -140,6 +158,8 @@
       max-width: 1100px;
       margin: 0 auto;
       padding: 0 3rem;
+      position: relative;
+      z-index: 2;
     }
 
     .reveal {
@@ -154,12 +174,6 @@
       transform: translateY(0);
     }
 
-    .divider {
-      width: 100%;
-      height: 1px;
-      background: #2A2A2A;
-    }
-
     /* ═══════════════════════════════════════════════
        SECTION 01 — HERO
        ═══════════════════════════════════════════════ */
@@ -172,6 +186,33 @@
       text-align: center;
       position: relative;
       padding: 8rem 3rem 4rem;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80&auto=format&fit=crop')
+        center center / cover no-repeat;
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(10, 10, 10, 0.75) 0%,
+        rgba(10, 10, 10, 0.85) 40%,
+        rgba(10, 10, 10, 0.95) 100%
+      );
+    }
+
+    .hero > *:not(.hero-bg) {
+      position: relative;
+      z-index: 2;
     }
 
     .hero-domain {
@@ -184,6 +225,7 @@
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: #6A6A6A;
+      z-index: 2;
     }
 
     .hero-label {
@@ -244,6 +286,19 @@
       color: #5A5A5A;
       letter-spacing: 0.05em;
       white-space: nowrap;
+      z-index: 2;
+    }
+
+    /* Decorative gold line under hero */
+    .hero-line {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, #C9A96E, transparent);
+      z-index: 2;
     }
 
     /* ═══════════════════════════════════════════════
@@ -252,6 +307,22 @@
     .problem {
       background: #1A1A1A;
       padding: 10rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .problem-bg {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 45%;
+      height: 100%;
+      background:
+        url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&auto=format&fit=crop')
+        center center / cover no-repeat;
+      opacity: 0.08;
+      mask-image: linear-gradient(to left, rgba(0,0,0,0.3), transparent);
+      -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.3), transparent);
     }
 
     .problem h2 {
@@ -300,35 +371,68 @@
        SECTION 03 — THE APPROACH
        ═══════════════════════════════════════════════ */
     .approach {
-      padding: 10rem 0;
+      padding: 0;
       background: #0A0A0A;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 80vh;
     }
 
-    .approach .section-inner {
-      text-align: center;
+    .approach-image {
+      position: relative;
+      overflow: hidden;
     }
 
-    .approach h2 {
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      max-width: 22ch;
-      margin: 0 auto 6rem;
+    .approach-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .approach-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        rgba(10, 10, 10, 0) 0%,
+        rgba(10, 10, 10, 0.6) 70%,
+        rgba(10, 10, 10, 1) 100%
+      );
+    }
+
+    .approach-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 5rem 6rem 4rem;
+    }
+
+    .approach-content .label {
+      margin-bottom: 2.5rem;
+    }
+
+    .approach-content h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      max-width: 18ch;
+      margin-bottom: 4rem;
       color: #F5F0EB;
     }
 
     .approach-steps {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 2.5rem;
-      margin-bottom: 5rem;
+      gap: 2rem;
+      margin-bottom: 4rem;
     }
 
     .approach-step {
-      font-size: clamp(1rem, 2vw, 1.125rem);
+      font-size: clamp(0.95rem, 1.8vw, 1.05rem);
       color: #8A8A8A;
       font-weight: 300;
       line-height: 1.8;
-      max-width: 50ch;
+      max-width: 45ch;
       position: relative;
       padding-left: 2.5rem;
     }
@@ -347,7 +451,7 @@
     .approach-quote {
       font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+      font-size: clamp(1.1rem, 2vw, 1.25rem);
       color: #C9A96E;
       letter-spacing: 0.02em;
       text-transform: none;
@@ -359,6 +463,17 @@
     .proof {
       background: #1A1A1A;
       padding: 10rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .proof-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        url('https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=1920&q=80&auto=format&fit=crop')
+        center center / cover no-repeat;
+      opacity: 0.06;
     }
 
     .proof .section-inner {
@@ -375,6 +490,12 @@
 
     .proof-item {
       padding: 3rem 1.5rem;
+      border: 1px solid transparent;
+      transition: border-color 0.4s ease;
+    }
+
+    .proof-item:hover {
+      border-color: #2A2A2A;
     }
 
     .proof-number {
@@ -404,11 +525,41 @@
     }
 
     /* ═══════════════════════════════════════════════
+       DIVIDER STRIP (between sections)
+       ═══════════════════════════════════════════════ */
+    .strip {
+      height: 300px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .strip-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .strip-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(10, 10, 10, 1) 0%,
+        rgba(10, 10, 10, 0.5) 50%,
+        rgba(10, 10, 10, 1) 100%
+      );
+    }
+
+    /* ═══════════════════════════════════════════════
        SECTION 05 — APPLICATION GATE
        ═══════════════════════════════════════════════ */
     .application {
       padding: 10rem 0;
       background: #0A0A0A;
+      position: relative;
     }
 
     .application .section-inner {
@@ -457,7 +608,7 @@
       font-weight: 300;
       padding: 1rem 1.2rem;
       outline: none;
-      transition: border-color 0.4s ease;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
       -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;
@@ -473,6 +624,7 @@
     .form-group select:focus,
     .form-group textarea:focus {
       border-color: #C9A96E;
+      box-shadow: 0 0 0 1px rgba(201, 169, 110, 0.1);
     }
 
     .form-group select {
@@ -578,15 +730,37 @@
 
       .proof-grid {
         grid-template-columns: 1fr;
-        gap: 3rem;
+        gap: 1rem;
       }
 
       .proof-item {
-        padding: 2rem 1rem;
+        padding: 2.5rem 1rem;
       }
 
       .proof-item:not(:last-child) {
         border-bottom: 1px solid #2A2A2A;
+      }
+
+      .approach {
+        grid-template-columns: 1fr;
+      }
+
+      .approach-image {
+        height: 40vh;
+        min-height: 300px;
+      }
+
+      .approach-image::after {
+        background: linear-gradient(
+          180deg,
+          rgba(10, 10, 10, 0) 0%,
+          rgba(10, 10, 10, 0.7) 70%,
+          rgba(10, 10, 10, 1) 100%
+        );
+      }
+
+      .approach-content {
+        padding: 4rem 3rem;
       }
     }
 
@@ -613,14 +787,17 @@
       }
 
       .problem,
-      .approach,
       .proof,
       .application {
         padding: 7rem 0;
       }
 
-      .approach-step {
-        text-align: left;
+      .approach-content {
+        padding: 3.5rem 2rem;
+      }
+
+      .strip {
+        height: 200px;
       }
     }
 
@@ -653,10 +830,13 @@
       }
 
       .problem,
-      .approach,
       .proof,
       .application {
         padding: 5.5rem 0;
+      }
+
+      .approach-content {
+        padding: 3rem 1.5rem;
       }
 
       .cta-button {
@@ -672,6 +852,10 @@
       .hero-label {
         font-size: 10px;
       }
+
+      .strip {
+        height: 150px;
+      }
     }
 
     /* ═══════════════════════════════════════════════
@@ -683,6 +867,14 @@
     .reveal-delay-4 { transition-delay: 0.4s; }
     .reveal-delay-5 { transition-delay: 0.5s; }
     .reveal-delay-6 { transition-delay: 0.6s; }
+
+    /* ═══════════════════════════════════════════════
+       PARALLAX (subtle)
+       ═══════════════════════════════════════════════ */
+    .parallax-bg {
+      will-change: transform;
+      transition: transform 0.1s linear;
+    }
   </style>
 </head>
 <body>
@@ -699,18 +891,21 @@
        SECTION 01 — HERO
        ═══════════════════════════════════════════════ -->
   <section class="hero" id="hero">
+    <div class="hero-bg parallax-bg" id="heroBg"></div>
     <span class="hero-domain reveal reveal-delay-1">fullcapacity.io</span>
     <div class="hero-label reveal reveal-delay-2">Professional Services</div>
     <h1 class="reveal reveal-delay-3">Your firm has a ceiling. We remove it.</h1>
     <p class="hero-sub reveal reveal-delay-4">Full Capacity rebuilds how professional services firms operate&thinsp;&mdash;&thinsp;so every partner, every hour, and every operating model performs at maximum.</p>
     <a href="#application" class="cta-button reveal reveal-delay-5">Apply for Access</a>
     <div class="hero-footer reveal reveal-delay-6">We work with twelve firms at a time.</div>
+    <div class="hero-line"></div>
   </section>
 
   <!-- ═══════════════════════════════════════════════
        SECTION 02 — THE PROBLEM
        ═══════════════════════════════════════════════ -->
   <section class="problem" id="problem">
+    <div class="problem-bg"></div>
     <div class="section-inner">
       <div class="label reveal">The Reality</div>
       <h2 class="reveal reveal-delay-1">Most firms are operating at 60% of their ceiling.</h2>
@@ -732,10 +927,20 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════
+       PHOTO STRIP
+       ═══════════════════════════════════════════════ -->
+  <div class="strip">
+    <div class="strip-bg" style="background-image: url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1920&q=80&auto=format&fit=crop');"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
        SECTION 03 — THE APPROACH
        ═══════════════════════════════════════════════ -->
   <section class="approach" id="approach">
-    <div class="section-inner">
+    <div class="approach-image">
+      <img src="https://images.unsplash.com/photo-1497215842964-222b430dc094?w=1200&q=80&auto=format&fit=crop" alt="" loading="lazy">
+    </div>
+    <div class="approach-content">
       <div class="label reveal">What We Do</div>
       <h2 class="reveal reveal-delay-1">We rebuild the operating model. Nothing more.</h2>
       <div class="approach-steps">
@@ -751,6 +956,7 @@
        SECTION 04 — SOCIAL PROOF
        ═══════════════════════════════════════════════ -->
   <section class="proof" id="proof">
+    <div class="proof-bg"></div>
     <div class="section-inner">
       <div class="label reveal">Results</div>
       <div class="proof-grid">
@@ -770,6 +976,13 @@
       <p class="proof-disclaimer reveal reveal-delay-4">Results vary by firm size and complexity.</p>
     </div>
   </section>
+
+  <!-- ═══════════════════════════════════════════════
+       PHOTO STRIP 2
+       ═══════════════════════════════════════════════ -->
+  <div class="strip">
+    <div class="strip-bg" style="background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1920&q=80&auto=format&fit=crop');"></div>
+  </div>
 
   <!-- ═══════════════════════════════════════════════
        SECTION 05 — APPLICATION GATE
@@ -893,9 +1106,21 @@
 
       window.addEventListener('scroll', checkReveal, { passive: true });
       window.addEventListener('resize', checkReveal, { passive: true });
-
-      /* Trigger initial check after brief delay for hero elements */
       setTimeout(checkReveal, 100);
+
+      /* ── Subtle parallax on hero background ─────── */
+      var heroBg = document.getElementById('heroBg');
+
+      function updateParallax() {
+        var scrolled = window.scrollY;
+        var heroHeight = window.innerHeight;
+        if (scrolled < heroHeight) {
+          heroBg.style.transform = 'translateY(' + (scrolled * 0.35) + 'px) scale(1.1)';
+        }
+      }
+
+      window.addEventListener('scroll', updateParallax, { passive: true });
+      updateParallax();
 
       /* ── Form handling ──────────────────────────── */
       var form = document.getElementById('applicationForm');
@@ -904,7 +1129,6 @@
       form.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        /* Basic validation */
         var firmName = document.getElementById('firmName').value.trim();
         var yourName = document.getElementById('yourName').value.trim();
         var yourRole = document.getElementById('yourRole').value;
@@ -914,11 +1138,8 @@
           return;
         }
 
-        /* Hide form, show success */
         form.style.display = 'none';
         success.classList.add('active');
-
-        /* Scroll success message into view */
         success.scrollIntoView({ behavior: 'smooth', block: 'center' });
       });
     })();
