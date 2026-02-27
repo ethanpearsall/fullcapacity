@@ -7,7 +7,7 @@
   <meta name="description" content="Full Capacity rebuilds how professional services firms operate. Application only.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     /* ═══════════════════════════════════════════════
        RESET & BASE
@@ -39,7 +39,7 @@
     }
 
     /* ═══════════════════════════════════════════════
-       FILM GRAIN OVERLAY (global texture)
+       FILM GRAIN OVERLAY
        ═══════════════════════════════════════════════ */
     body::after {
       content: '';
@@ -50,7 +50,7 @@
       height: 100%;
       pointer-events: none;
       z-index: 9999;
-      opacity: 0.03;
+      opacity: 0.025;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
       background-repeat: repeat;
       background-size: 256px 256px;
@@ -60,11 +60,9 @@
        TYPOGRAPHY
        ═══════════════════════════════════════════════ */
     h1, h2, h3 {
-      font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      line-height: 1.2;
+      font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+      font-weight: 300;
+      line-height: 1.15;
     }
 
     p {
@@ -164,7 +162,7 @@
 
     .reveal {
       opacity: 0;
-      transform: translateY(40px);
+      transform: translateY(30px);
       transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                   transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
@@ -185,13 +183,13 @@
       align-items: center;
       text-align: center;
       position: relative;
-      padding: 8rem 3rem 4rem;
+      padding: 0 3rem;
       overflow: hidden;
     }
 
     .hero-bg {
       position: absolute;
-      inset: 0;
+      inset: -10%;
       z-index: 0;
       background:
         url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80&auto=format&fit=crop')
@@ -204,27 +202,30 @@
       inset: 0;
       background: linear-gradient(
         180deg,
-        rgba(10, 10, 10, 0.75) 0%,
-        rgba(10, 10, 10, 0.85) 40%,
-        rgba(10, 10, 10, 0.95) 100%
+        rgba(10, 10, 10, 0.7) 0%,
+        rgba(10, 10, 10, 0.8) 40%,
+        rgba(10, 10, 10, 0.92) 100%
       );
     }
 
-    .hero > *:not(.hero-bg) {
+    .hero-content {
       position: relative;
       z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .hero-domain {
-      position: absolute;
-      top: 7rem;
-      left: 3rem;
       font-family: 'Inter', sans-serif;
       font-size: 10px;
       font-weight: 400;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: #6A6A6A;
+      position: absolute;
+      top: 6.5rem;
+      left: 3rem;
       z-index: 2;
     }
 
@@ -235,21 +236,22 @@
       letter-spacing: 0.3em;
       text-transform: uppercase;
       color: #8A8A8A;
-      margin-bottom: 3rem;
+      margin-bottom: 2.5rem;
     }
 
     .hero h1 {
-      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
-      max-width: 14ch;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      max-width: 16ch;
       margin: 0 auto 2rem;
       color: #F5F0EB;
+      letter-spacing: -0.01em;
     }
 
     .hero-sub {
-      font-size: clamp(1rem, 2vw, 1.125rem);
+      font-size: clamp(0.95rem, 1.8vw, 1.05rem);
       color: #8A8A8A;
-      max-width: 58ch;
-      margin: 0 auto 4rem;
+      max-width: 52ch;
+      margin: 0 auto 3.5rem;
       font-weight: 300;
       line-height: 1.8;
     }
@@ -275,29 +277,29 @@
       color: #0A0A0A;
     }
 
-    .hero-footer {
+    .hero-capacity {
       position: absolute;
-      bottom: 3.5rem;
+      bottom: 3rem;
       left: 50%;
       transform: translateX(-50%);
       font-family: 'Inter', sans-serif;
       font-size: 12px;
       font-weight: 400;
-      color: #5A5A5A;
+      color: #4A4A4A;
       letter-spacing: 0.05em;
       white-space: nowrap;
       z-index: 2;
+      text-align: center;
     }
 
-    /* Decorative gold line under hero */
     .hero-line {
       position: absolute;
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
       width: 1px;
-      height: 60px;
-      background: linear-gradient(to bottom, #C9A96E, transparent);
+      height: 50px;
+      background: linear-gradient(to bottom, rgba(201, 169, 110, 0.4), transparent);
       z-index: 2;
     }
 
@@ -305,7 +307,7 @@
        SECTION 02 — THE PROBLEM
        ═══════════════════════════════════════════════ */
     .problem {
-      background: #1A1A1A;
+      background: #131313;
       padding: 10rem 0;
       position: relative;
       overflow: hidden;
@@ -315,21 +317,22 @@
       position: absolute;
       top: 0;
       right: 0;
-      width: 45%;
+      width: 40%;
       height: 100%;
       background:
         url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&auto=format&fit=crop')
         center center / cover no-repeat;
-      opacity: 0.08;
-      mask-image: linear-gradient(to left, rgba(0,0,0,0.3), transparent);
-      -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.3), transparent);
+      opacity: 0.05;
+      mask-image: linear-gradient(to left, rgba(0,0,0,0.25), transparent);
+      -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.25), transparent);
     }
 
     .problem h2 {
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      max-width: 20ch;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      max-width: 22ch;
       margin-bottom: 5rem;
       color: #F5F0EB;
+      letter-spacing: -0.01em;
     }
 
     .problem-grid {
@@ -345,8 +348,9 @@
 
     .problem-item::before {
       content: attr(data-num);
-      font-family: 'Playfair Display', serif;
-      font-size: 12px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      font-weight: 400;
       color: #C9A96E;
       letter-spacing: 0.15em;
       display: block;
@@ -355,7 +359,7 @@
 
     .problem-item p {
       font-size: 1rem;
-      color: #8A8A8A;
+      color: #7A7A7A;
       line-height: 1.8;
       font-weight: 300;
     }
@@ -388,6 +392,7 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      filter: brightness(0.7);
     }
 
     .approach-image::after {
@@ -397,7 +402,7 @@
       background: linear-gradient(
         90deg,
         rgba(10, 10, 10, 0) 0%,
-        rgba(10, 10, 10, 0.6) 70%,
+        rgba(10, 10, 10, 0.5) 60%,
         rgba(10, 10, 10, 1) 100%
       );
     }
@@ -414,10 +419,11 @@
     }
 
     .approach-content h2 {
-      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
       max-width: 18ch;
       margin-bottom: 4rem;
       color: #F5F0EB;
+      letter-spacing: -0.01em;
     }
 
     .approach-steps {
@@ -428,11 +434,11 @@
     }
 
     .approach-step {
-      font-size: clamp(0.95rem, 1.8vw, 1.05rem);
-      color: #8A8A8A;
+      font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+      color: #7A7A7A;
       font-weight: 300;
       line-height: 1.8;
-      max-width: 45ch;
+      max-width: 42ch;
       position: relative;
       padding-left: 2.5rem;
     }
@@ -442,26 +448,26 @@
       position: absolute;
       left: 0;
       top: 0.15em;
-      font-family: 'Playfair Display', serif;
-      font-size: 12px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
       color: #3A3A3A;
       letter-spacing: 0.1em;
     }
 
     .approach-quote {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-size: clamp(1.1rem, 2vw, 1.25rem);
+      font-size: clamp(1.2rem, 2.2vw, 1.5rem);
       color: #C9A96E;
-      letter-spacing: 0.02em;
-      text-transform: none;
+      letter-spacing: 0.01em;
+      font-weight: 300;
     }
 
     /* ═══════════════════════════════════════════════
        SECTION 04 — SOCIAL PROOF
        ═══════════════════════════════════════════════ */
     .proof {
-      background: #1A1A1A;
+      background: #131313;
       padding: 10rem 0;
       position: relative;
       overflow: hidden;
@@ -473,7 +479,7 @@
       background:
         url('https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=1920&q=80&auto=format&fit=crop')
         center center / cover no-repeat;
-      opacity: 0.06;
+      opacity: 0.04;
     }
 
     .proof .section-inner {
@@ -499,18 +505,18 @@
     }
 
     .proof-number {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3rem, 6vw, 4.5rem);
-      font-weight: 400;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 7vw, 5.5rem);
+      font-weight: 300;
       color: #F5F0EB;
       line-height: 1;
       margin-bottom: 1.2rem;
-      letter-spacing: 0.05em;
+      letter-spacing: -0.02em;
     }
 
     .proof-desc {
       font-size: 0.85rem;
-      color: #8A8A8A;
+      color: #7A7A7A;
       font-weight: 300;
       letter-spacing: 0.03em;
       line-height: 1.6;
@@ -520,15 +526,15 @@
 
     .proof-disclaimer {
       font-size: 12px;
-      color: #5A5A5A;
+      color: #4A4A4A;
       font-weight: 300;
     }
 
     /* ═══════════════════════════════════════════════
-       DIVIDER STRIP (between sections)
+       DIVIDER STRIP
        ═══════════════════════════════════════════════ */
     .strip {
-      height: 300px;
+      height: 280px;
       position: relative;
       overflow: hidden;
     }
@@ -539,6 +545,7 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      filter: brightness(0.4);
     }
 
     .strip-bg::after {
@@ -548,7 +555,16 @@
       background: linear-gradient(
         180deg,
         rgba(10, 10, 10, 1) 0%,
-        rgba(10, 10, 10, 0.5) 50%,
+        rgba(10, 10, 10, 0.4) 50%,
+        rgba(19, 19, 19, 1) 100%
+      );
+    }
+
+    .strip-2 .strip-bg::after {
+      background: linear-gradient(
+        180deg,
+        rgba(19, 19, 19, 1) 0%,
+        rgba(10, 10, 10, 0.4) 50%,
         rgba(10, 10, 10, 1) 100%
       );
     }
@@ -563,22 +579,35 @@
     }
 
     .application .section-inner {
-      max-width: 680px;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .application .label,
+    .application h2,
+    .application .application-sub {
+      text-align: center;
+    }
+
+    .application .application-sub {
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .application h2 {
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-size: clamp(2rem, 4vw, 3rem);
       margin-bottom: 2rem;
       color: #F5F0EB;
+      letter-spacing: -0.01em;
     }
 
     .application-sub {
-      color: #8A8A8A;
+      color: #7A7A7A;
       font-weight: 300;
       margin-bottom: 4rem;
       font-size: 1rem;
       line-height: 1.8;
-      max-width: 55ch;
+      max-width: 50ch;
     }
 
     .form-group {
@@ -592,7 +621,7 @@
       font-weight: 500;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: #6A6A6A;
+      color: #5A5A5A;
       margin-bottom: 0.7rem;
     }
 
@@ -600,8 +629,8 @@
     .form-group select,
     .form-group textarea {
       width: 100%;
-      background: #141414;
-      border: 1px solid #2A2A2A;
+      background: #111111;
+      border: 1px solid #222222;
       color: #F5F0EB;
       font-family: 'Inter', sans-serif;
       font-size: 16px;
@@ -617,26 +646,26 @@
 
     .form-group input::placeholder,
     .form-group textarea::placeholder {
-      color: #3A3A3A;
+      color: #333333;
     }
 
     .form-group input:focus,
     .form-group select:focus,
     .form-group textarea:focus {
       border-color: #C9A96E;
-      box-shadow: 0 0 0 1px rgba(201, 169, 110, 0.1);
+      box-shadow: 0 0 0 1px rgba(201, 169, 110, 0.08);
     }
 
     .form-group select {
       cursor: pointer;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236A6A6A' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235A5A5A' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 1.2rem center;
       padding-right: 3rem;
     }
 
     .form-group select option {
-      background: #141414;
+      background: #111111;
       color: #F5F0EB;
     }
 
@@ -664,9 +693,10 @@
     .form-disclaimer {
       margin-top: 2.5rem;
       font-size: 12px;
-      color: #5A5A5A;
+      color: #4A4A4A;
       font-weight: 300;
       line-height: 1.7;
+      text-align: center;
     }
 
     .form-success {
@@ -680,13 +710,14 @@
     }
 
     .form-success h3 {
-      font-size: clamp(1.4rem, 3vw, 1.8rem);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
       margin-bottom: 1.5rem;
       color: #F5F0EB;
+      font-weight: 300;
     }
 
     .form-success p {
-      color: #8A8A8A;
+      color: #7A7A7A;
       font-weight: 300;
       max-width: 45ch;
       margin: 0 auto;
@@ -699,7 +730,7 @@
     .footer {
       padding: 6rem 0;
       text-align: center;
-      border-top: 1px solid #2A2A2A;
+      border-top: 1px solid #1A1A1A;
     }
 
     .footer-domain {
@@ -708,13 +739,13 @@
       font-weight: 500;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: #5A5A5A;
+      color: #4A4A4A;
       margin-bottom: 1.5rem;
     }
 
     .footer-copy {
       font-size: 12px;
-      color: #3A3A3A;
+      color: #2A2A2A;
       font-weight: 300;
       letter-spacing: 0.03em;
     }
@@ -738,7 +769,7 @@
       }
 
       .proof-item:not(:last-child) {
-        border-bottom: 1px solid #2A2A2A;
+        border-bottom: 1px solid #1A1A1A;
       }
 
       .approach {
@@ -746,7 +777,7 @@
       }
 
       .approach-image {
-        height: 40vh;
+        height: 45vh;
         min-height: 300px;
       }
 
@@ -761,6 +792,12 @@
 
       .approach-content {
         padding: 4rem 3rem;
+        text-align: center;
+        align-items: center;
+      }
+
+      .approach-steps {
+        align-items: center;
       }
     }
 
@@ -774,11 +811,11 @@
       }
 
       .hero {
-        padding: 7rem 2rem 4rem;
+        padding: 0 2rem;
       }
 
       .hero-domain {
-        top: 6rem;
+        top: 5.5rem;
         left: 2rem;
       }
 
@@ -797,7 +834,11 @@
       }
 
       .strip {
-        height: 200px;
+        height: 180px;
+      }
+
+      .application .section-inner {
+        padding: 0 2rem;
       }
     }
 
@@ -811,18 +852,18 @@
       }
 
       .hero {
-        padding: 6rem 1.5rem 3.5rem;
+        padding: 0 1.5rem;
       }
 
       .hero-domain {
-        top: 5.5rem;
+        top: 5rem;
         left: 1.5rem;
         font-size: 9px;
       }
 
-      .hero-footer {
+      .hero-capacity {
         font-size: 11px;
-        bottom: 2.5rem;
+        bottom: 2rem;
       }
 
       .section-inner {
@@ -832,7 +873,7 @@
       .problem,
       .proof,
       .application {
-        padding: 5.5rem 0;
+        padding: 5rem 0;
       }
 
       .approach-content {
@@ -854,7 +895,11 @@
       }
 
       .strip {
-        height: 150px;
+        height: 120px;
+      }
+
+      .application .section-inner {
+        padding: 0 1.5rem;
       }
     }
 
@@ -867,14 +912,6 @@
     .reveal-delay-4 { transition-delay: 0.4s; }
     .reveal-delay-5 { transition-delay: 0.5s; }
     .reveal-delay-6 { transition-delay: 0.6s; }
-
-    /* ═══════════════════════════════════════════════
-       PARALLAX (subtle)
-       ═══════════════════════════════════════════════ */
-    .parallax-bg {
-      will-change: transform;
-      transition: transform 0.1s linear;
-    }
   </style>
 </head>
 <body>
@@ -893,11 +930,13 @@
   <section class="hero" id="hero">
     <div class="hero-bg parallax-bg" id="heroBg"></div>
     <span class="hero-domain reveal reveal-delay-1">fullcapacity.io</span>
-    <div class="hero-label reveal reveal-delay-2">Professional Services</div>
-    <h1 class="reveal reveal-delay-3">Your firm has a ceiling. We remove it.</h1>
-    <p class="hero-sub reveal reveal-delay-4">Full Capacity rebuilds how professional services firms operate&thinsp;&mdash;&thinsp;so every partner, every hour, and every operating model performs at maximum.</p>
-    <a href="#application" class="cta-button reveal reveal-delay-5">Apply for Access</a>
-    <div class="hero-footer reveal reveal-delay-6">We work with twelve firms at a time.</div>
+    <div class="hero-content">
+      <div class="hero-label reveal reveal-delay-2">Professional Services</div>
+      <h1 class="reveal reveal-delay-3">Your firm has a ceiling.<br>We remove it.</h1>
+      <p class="hero-sub reveal reveal-delay-4">Full Capacity rebuilds how professional services firms operate&thinsp;&mdash;&thinsp;so every partner, every hour, and every operating model performs at maximum.</p>
+      <a href="#application" class="cta-button reveal reveal-delay-5">Apply for Access</a>
+    </div>
+    <div class="hero-capacity reveal reveal-delay-6">We work with twelve firms at a time.</div>
     <div class="hero-line"></div>
   </section>
 
@@ -980,8 +1019,8 @@
   <!-- ═══════════════════════════════════════════════
        PHOTO STRIP 2
        ═══════════════════════════════════════════════ -->
-  <div class="strip">
-    <div class="strip-bg" style="background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1920&q=80&auto=format&fit=crop');"></div>
+  <div class="strip strip-2">
+    <div class="strip-bg" style="background-image: url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1920&q=80&auto=format&fit=crop');"></div>
   </div>
 
   <!-- ═══════════════════════════════════════════════
@@ -1080,10 +1119,11 @@
       document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
         anchor.addEventListener('click', function (e) {
           e.preventDefault();
-          var target = document.querySelector(this.getAttribute('href'));
+          var href = this.getAttribute('href');
+          if (href === '#') return;
+          var target = document.querySelector(href);
           if (target) {
-            var offset = 0;
-            var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+            var top = target.getBoundingClientRect().top + window.pageYOffset;
             window.scrollTo({ top: top, behavior: 'smooth' });
           }
         });
@@ -1115,7 +1155,7 @@
         var scrolled = window.scrollY;
         var heroHeight = window.innerHeight;
         if (scrolled < heroHeight) {
-          heroBg.style.transform = 'translateY(' + (scrolled * 0.35) + 'px) scale(1.1)';
+          heroBg.style.transform = 'translateY(' + (scrolled * 0.3) + 'px) scale(1.1)';
         }
       }
 
