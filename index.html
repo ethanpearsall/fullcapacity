@@ -327,34 +327,45 @@
     .rebuild {
       background: #0A0A0A;
       padding: 10rem 2rem;
-      text-align: center;
     }
 
     .rebuild-inner {
-      max-width: 640px;
+      max-width: 1000px;
       margin: 0 auto;
     }
 
-    .rebuild p {
-      font-family: 'Inter', sans-serif;
-      font-size: 17px;
-      color: #F5F0EB;
-      line-height: 1.7;
-      font-weight: 300;
-      margin: 0 auto 2rem;
+    .rebuild-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+      margin-top: 4rem;
     }
 
-    .rebuild p:last-of-type {
-      margin-bottom: 0;
+    .rebuild-block h3 {
+      font-size: 24px;
+      color: #F5F0EB;
+      margin-bottom: 1.2rem;
+      font-weight: 400;
+    }
+
+    .rebuild-block p {
+      font-family: 'Inter', sans-serif;
+      font-size: 17px;
+      color: #8A8A8A;
+      line-height: 1.7;
+      font-weight: 300;
+      max-width: 600px;
     }
 
     .rebuild-result {
-      font-family: 'Playfair Display', Georgia, serif !important;
-      font-size: 22px !important;
-      font-weight: 400 !important;
-      line-height: 1.5 !important;
-      color: #F5F0EB !important;
-      margin-top: 3rem !important;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 22px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #F5F0EB;
+      text-align: center;
+      max-width: 700px;
+      margin: 4rem auto 0;
       border-top: 1px solid #2A2A2A;
       padding-top: 3rem;
     }
@@ -610,6 +621,20 @@
         padding-bottom: 0;
       }
 
+      .rebuild-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .rebuild-block {
+        padding: 2.5rem 0;
+        border-top: 1px solid #2A2A2A;
+      }
+
+      .rebuild-block:last-child {
+        padding-bottom: 0;
+      }
+
       .results-grid {
         flex-direction: column;
         align-items: center;
@@ -767,9 +792,20 @@
   <section class="rebuild" id="rebuild">
     <div class="rebuild-inner">
       <div class="section-label reveal">What we rebuild</div>
-      <p class="reveal reveal-d1">Every professional services firm runs on the same broken pattern: senior people doing junior work, operational drag buried inside billable time, and capacity lost to processes no one has questioned in years.</p>
-      <p class="reveal reveal-d2">We work inside your operations to restructure how work flows through your firm &mdash; how it&rsquo;s allocated, how it&rsquo;s executed, how your people spend their hours. We rebuild the systems your firm runs on so your fee earners do the work they were hired for, and everything else runs without friction.</p>
-      <p class="reveal reveal-d3">Every engagement is built around your firm&rsquo;s existing infrastructure, fully contained within your environment, with nothing exposed externally. Your clients&rsquo; matters, your data, your IP &mdash; it stays exactly where it is. We don&rsquo;t ask you to trust a platform. We rebuild what&rsquo;s already yours so it performs.</p>
+      <div class="rebuild-grid">
+        <div class="rebuild-block reveal reveal-d1">
+          <h3>The pattern</h3>
+          <p>Senior people doing junior work. Operational drag buried inside billable time. Capacity lost to processes no one has questioned in years.</p>
+        </div>
+        <div class="rebuild-block reveal reveal-d2">
+          <h3>The rebuild</h3>
+          <p>We restructure how work is allocated, executed, and delivered. Your systems, redesigned so fee earners do the work they were hired for.</p>
+        </div>
+        <div class="rebuild-block reveal reveal-d3">
+          <h3>Your environment</h3>
+          <p>Built entirely within your existing infrastructure. Your clients&rsquo; matters, your data, your IP &mdash; nothing leaves. No platform. No migration.</p>
+        </div>
+      </div>
       <p class="rebuild-result reveal reveal-d4">The result: partners reclaim their time, junior staff operate at a higher level, and your firm runs closer to its actual capacity than it ever has.</p>
     </div>
   </section>
