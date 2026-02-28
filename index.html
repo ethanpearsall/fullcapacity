@@ -463,23 +463,14 @@
       align-items: start;
     }
 
-    /* Founder portrait placeholder — 3:4 aspect ratio */
-    .portrait-placeholder {
-      background: #0A0A0A;
-      border: 1px solid #2A2A2A;
+    /* Founder portrait — black & white */
+    .founder-portrait {
+      width: 100%;
       aspect-ratio: 3 / 4;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .portrait-placeholder span {
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #2A2A2A;
+      object-fit: cover;
+      object-position: center top;
+      filter: grayscale(100%);
+      display: block;
     }
 
     .form-group {
@@ -847,9 +838,7 @@
       </div>
 
       <div class="application-layout reveal reveal-d4">
-        <div class="portrait-placeholder">
-          <span style="max-width: 200px; text-align: center; line-height: 1.6;">Editorial black and white founder portrait &mdash; to be added before launch</span>
-        </div>
+        <img src="IMG_0558.jpeg" alt="Founder portrait" class="founder-portrait">
 
         <div class="application-form-wrap">
           <form id="applicationForm" autocomplete="off" novalidate>
