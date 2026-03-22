@@ -218,17 +218,121 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #F4F4F5;
+      background: radial-gradient(ellipse at 60% 50%, #D6E4F0 0%, #E8EFF6 60%, #F4F4F5 100%);
       border-radius: 12px;
-      min-height: 360px;
-      border: 1px solid #E5E7EB;
+      min-height: 420px;
+      padding: 2rem 1.5rem;
+      position: relative;
+      overflow: hidden;
     }
 
-    .hero-graphic-placeholder {
-      font-size: 14px;
-      color: #9CA3AF;
-      text-align: center;
+    .hero-illustration {
+      width: 100%;
+      max-width: 460px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
     }
+
+    /* Pipeline row */
+    .pipeline-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .pipeline-step {
+      background: #1B3A5C;
+      color: #FFFFFF;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 8px;
+      white-space: nowrap;
+    }
+
+    .pipeline-arrow {
+      color: #7BAFD4;
+      font-size: 18px;
+      line-height: 1;
+      margin-top: -8px;
+    }
+
+    .pipeline-arrow svg {
+      width: 24px;
+      height: 20px;
+      fill: none;
+      stroke: #7BAFD4;
+      stroke-width: 2;
+    }
+
+    /* Enquiries card */
+    .enquiries-card {
+      background: #FFFFFF;
+      border-radius: 14px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+
+    .enquiries-card h4 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 1rem;
+    }
+
+    .enquiry-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #F3F4F6;
+    }
+
+    .enquiry-row:last-child {
+      border-bottom: none;
+    }
+
+    .enquiry-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .enquiry-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .dot-green { background: #22C55E; }
+    .dot-orange { background: #F97316; }
+    .dot-blue { background: #3B82F6; }
+    .dot-purple { background: #A855F7; }
+    .dot-yellow { background: #EAB308; }
+
+    .enquiry-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: #111827;
+    }
+
+    .enquiry-badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+      color: #FFFFFF;
+    }
+
+    .badge-new { background: #22C55E; }
+    .badge-responded { background: #F97316; }
+    .badge-booked { background: #3B82F6; }
+    .badge-quote { background: #A855F7; }
+    .badge-followup { background: #EAB308; color: #111827; }
 
     /* ── 2. PROBLEM ───────────────────────────────── */
     .problem-list {
@@ -556,7 +660,18 @@
       }
 
       .hero-graphic {
-        min-height: 240px;
+        min-height: 280px;
+        padding: 1.5rem 1rem;
+      }
+
+      .pipeline-step {
+        font-size: 11px;
+        padding: 6px 10px;
+      }
+
+      .pipeline-arrow svg {
+        width: 18px;
+        height: 16px;
       }
 
       .steps {
@@ -637,7 +752,55 @@
         <span class="hero-secondary reveal">Or email <a href="mailto:ethan@fullcapacity.io">ethan@fullcapacity.io</a></span>
       </div>
       <div class="hero-graphic reveal">
-        <div class="hero-graphic-placeholder">Illustration placeholder</div>
+        <div class="hero-illustration">
+          <div class="pipeline-row">
+            <span class="pipeline-step">Enquiry</span>
+            <span class="pipeline-arrow"><svg viewBox="0 0 24 20"><path d="M2 16 C8 2, 16 2, 22 6" stroke-linecap="round"/><path d="M19 3 L22 6 L18 8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="pipeline-step">Logged</span>
+            <span class="pipeline-arrow"><svg viewBox="0 0 24 20"><path d="M2 16 C8 2, 16 2, 22 6" stroke-linecap="round"/><path d="M19 3 L22 6 L18 8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="pipeline-step">Responded</span>
+            <span class="pipeline-arrow"><svg viewBox="0 0 24 20"><path d="M2 16 C8 2, 16 2, 22 6" stroke-linecap="round"/><path d="M19 3 L22 6 L18 8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="pipeline-step">Job / Quote</span>
+          </div>
+          <div class="enquiries-card">
+            <h4>Today&rsquo;s enquiries</h4>
+            <div class="enquiry-row">
+              <div class="enquiry-left">
+                <span class="enquiry-dot dot-green"></span>
+                <span class="enquiry-name">Sarah P &ndash; Boiler service</span>
+              </div>
+              <span class="enquiry-badge badge-new">New</span>
+            </div>
+            <div class="enquiry-row">
+              <div class="enquiry-left">
+                <span class="enquiry-dot dot-orange"></span>
+                <span class="enquiry-name">Jones Ltd &ndash; Leak repair</span>
+              </div>
+              <span class="enquiry-badge badge-responded">Responded</span>
+            </div>
+            <div class="enquiry-row">
+              <div class="enquiry-left">
+                <span class="enquiry-dot dot-blue"></span>
+                <span class="enquiry-name">Ahmed R &ndash; Radiator install</span>
+              </div>
+              <span class="enquiry-badge badge-booked">Job booked</span>
+            </div>
+            <div class="enquiry-row">
+              <div class="enquiry-left">
+                <span class="enquiry-dot dot-purple"></span>
+                <span class="enquiry-name">Wilson H &ndash; Boiler quote</span>
+              </div>
+              <span class="enquiry-badge badge-quote">Quote sent</span>
+            </div>
+            <div class="enquiry-row">
+              <div class="enquiry-left">
+                <span class="enquiry-dot dot-yellow"></span>
+                <span class="enquiry-name">Green &amp; Co &ndash; Annual service</span>
+              </div>
+              <span class="enquiry-badge badge-followup">Follow-up due</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
