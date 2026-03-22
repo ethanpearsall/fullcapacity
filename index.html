@@ -3,16 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Full Capacity — Operational Transformation for Professional Services Firms</title>
-  <meta name="description" content="Full Capacity rebuilds how professional services firms operate. Application only.">
-  <!-- Force HTTPS in production: add <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> or configure server-level HTTPS redirect -->
+  <title>FullCapacity — Stop losing jobs to missed calls and messy scheduling</title>
+  <meta name="description" content="FullCapacity installs a never-miss-a-job system for plumbing and HVAC companies. Capture every enquiry, respond fast, book more jobs.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ═══════════════════════════════════════════════
-       RESET
-       ═══════════════════════════════════════════════ */
     *, *::before, *::after {
       margin: 0;
       padding: 0;
@@ -33,57 +29,96 @@
     body {
       background: #F4F4F5;
       color: #111827;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
       font-size: 17px;
       line-height: 1.7;
       overflow-x: hidden;
     }
 
-    /* ═══════════════════════════════════════════════
-       NOISE GRAIN OVERLAY — 2-3% opacity
-       ═══════════════════════════════════════════════ */
-    body::after {
-      content: '';
+    /* ── NAV ─────────────────────────────────────── */
+    .nav {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.025;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-repeat: repeat;
-      background-size: 512px 512px;
+      z-index: 1000;
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid #E5E7EB;
     }
 
-    /* ═══════════════════════════════════════════════
-       TYPOGRAPHY
-       ═══════════════════════════════════════════════ */
-    h1, h2, h3 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-weight: 400;
-      line-height: 1.15;
-    }
-
-    .section-label {
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
+    .nav-logo {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
       color: #1F456E;
-      margin-bottom: 3rem;
+      text-decoration: none;
     }
 
-    /* ═══════════════════════════════════════════════
-       SCROLL REVEAL
-       ═══════════════════════════════════════════════ */
+    .nav-cta {
+      font-size: 13px;
+      font-weight: 600;
+      color: #FFFFFF;
+      background: #F59E0B;
+      padding: 8px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s ease;
+    }
+
+    .nav-cta:hover {
+      background: #D97706;
+    }
+
+    /* ── SHARED ───────────────────────────────────── */
+    .section {
+      padding: 6rem 2rem;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .bg-white { background: #FFFFFF; }
+    .bg-grey { background: #F4F4F5; }
+
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #F59E0B;
+      margin-bottom: 1rem;
+    }
+
+    .section-heading {
+      font-size: 36px;
+      font-weight: 700;
+      color: #1F456E;
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.01em;
+    }
+
+    .section-intro {
+      font-size: 17px;
+      color: #4B5563;
+      line-height: 1.7;
+      max-width: 680px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── SCROLL REVEAL ────────────────────────────── */
     .reveal {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                  transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
 
     .reveal.visible {
@@ -91,409 +126,351 @@
       transform: translateY(0);
     }
 
-    .reveal-d1 { transition-delay: 0.1s; }
-    .reveal-d2 { transition-delay: 0.2s; }
-    .reveal-d3 { transition-delay: 0.3s; }
-    .reveal-d4 { transition-delay: 0.4s; }
-    .reveal-d5 { transition-delay: 0.5s; }
-
-    /* ═══════════════════════════════════════════════
-       NAVIGATION
-       ═══════════════════════════════════════════════ */
-    .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      padding: 2rem 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: background 0.4s ease, padding 0.4s ease;
-    }
-
-    .nav.scrolled {
-      background: #F4F4F5;
-      padding: 1.2rem 3rem;
-    }
-
-    .nav-logo,
-    .nav-apply {
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #1F456E;
-      text-decoration: none;
-      transition: opacity 0.3s ease;
-    }
-
-    .nav-logo:hover,
-    .nav-apply:hover {
-      opacity: 0.7;
-    }
-
-    /* ═══════════════════════════════════════════════
-       SECTION 01 — HERO
-       ═══════════════════════════════════════════════ */
+    /* ── 1. HERO ──────────────────────────────────── */
     .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      position: relative;
-      padding: 8rem 2rem;
-    }
-
-    /* Dark abstract textural background — canvas-generated marble */
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      background-color: #1F456E;
-    }
-
-    .hero-bg canvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-    /* Overlay to keep text readable */
-    .hero-bg::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(31, 69, 110, 0.4);
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      max-width: 800px;
-    }
-
-    .hero-preheader {
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.7);
-      margin-bottom: 2.5rem;
-    }
-
-    .hero h1 {
-      font-size: 72px;
-      color: #FFFFFF;
-      margin-bottom: 2rem;
-      max-width: 600px;
-      letter-spacing: -0.01em;
-    }
-
-    .hero-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: 18px;
-      color: rgba(255, 255, 255, 0.8);
-      max-width: 560px;
-      line-height: 1.7;
-      font-weight: 300;
-      margin-bottom: 3rem;
-    }
-
-    .cta-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #FFFFFF;
-      background: #F59E0B;
-      border: none;
-      border-radius: 0;
-      padding: 16px 40px;
-      min-height: 48px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.3s ease;
-    }
-
-    .cta-btn:hover {
-      background: #D97706;
-    }
-
-    .hero-footnote {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.7);
-      margin-top: 2.5rem;
-      font-weight: 400;
-    }
-
-    /* ═══════════════════════════════════════════════
-       SECTION 02 — THE PROBLEM
-       ═══════════════════════════════════════════════ */
-    .problem {
-      background: #F4F4F5;
-      padding: 10rem 2rem;
-      text-align: center;
-    }
-
-    .problem-inner {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .problem h2 {
-      font-size: 48px;
-      color: #111827;
-      margin-bottom: 3rem;
-      letter-spacing: -0.01em;
-    }
-
-    .problem p {
-      font-family: 'Inter', sans-serif;
-      font-size: 17px;
-      color: #111827;
-      line-height: 1.7;
-      font-weight: 300;
-      max-width: 600px;
-      margin: 0 auto 2rem;
-    }
-
-    .problem p:last-of-type {
-      margin-bottom: 0;
-    }
-
-    /* ═══════════════════════════════════════════════
-       SECTION 03 — WHAT CHANGES
-       ═══════════════════════════════════════════════ */
-    .changes {
+      padding: 8rem 2rem 6rem;
       background: #FFFFFF;
-      padding: 10rem 2rem;
     }
 
-    .changes-inner {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .changes-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3rem;
-      margin-top: 4rem;
-    }
-
-    .changes-block-num {
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      font-weight: 500;
-      color: #F59E0B;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-    }
-
-    .changes-block h3 {
-      font-size: 24px;
-      color: #1F456E;
-      margin-bottom: 1.2rem;
-      font-weight: 400;
-    }
-
-    .changes-block p {
-      font-family: 'Inter', sans-serif;
-      font-size: 17px;
-      color: #6B7280;
-      line-height: 1.7;
-      font-weight: 300;
-      max-width: 600px;
-    }
-
-    /* ═══════════════════════════════════════════════
-       SECTION — WHAT WE REBUILD
-       ═══════════════════════════════════════════════ */
-    .rebuild {
-      background: #F4F4F5;
-      padding: 10rem 2rem;
-    }
-
-    .rebuild-inner {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .rebuild-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3rem;
-      margin-top: 4rem;
-    }
-
-    .rebuild-block h3 {
-      font-size: 24px;
-      color: #1F456E;
-      margin-bottom: 1.2rem;
-      font-weight: 400;
-    }
-
-    .rebuild-block p {
-      font-family: 'Inter', sans-serif;
-      font-size: 17px;
-      color: #6B7280;
-      line-height: 1.7;
-      font-weight: 300;
-      max-width: 600px;
-    }
-
-    .rebuild-result {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 22px;
-      font-weight: 400;
-      line-height: 1.5;
-      color: #111827;
-      text-align: center;
-      max-width: 700px;
-      margin: 4rem auto 0;
-      border-top: 1px solid #E5E7EB;
-      padding-top: 3rem;
-    }
-
-    /* ═══════════════════════════════════════════════
-       SECTION 04 — RESULTS
-       ═══════════════════════════════════════════════ */
-    .results {
-      background: #FFFFFF;
-      padding: 10rem 2rem;
-      text-align: center;
-    }
-
-    .results-inner {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .results-grid {
-      display: flex;
-      justify-content: center;
-      align-items: stretch;
-      margin-top: 4rem;
-    }
-
-    .results-stat {
-      flex: 1;
-      padding: 0 2.5rem;
-      text-align: center;
-    }
-
-    .results-stat:not(:last-child) {
-      border-right: 1px solid #E5E7EB;
-    }
-
-    .results-number {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 72px;
-      font-weight: 400;
-      color: #1F456E;
-      line-height: 1;
-      margin-bottom: 1rem;
-      letter-spacing: -0.02em;
-    }
-
-    .results-desc {
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      color: #6B7280;
-      font-weight: 300;
-      line-height: 1.6;
-      max-width: 180px;
-      margin: 0 auto;
-    }
-
-    /* ═══════════════════════════════════════════════
-       SECTION 05 — APPLICATION GATE
-       ═══════════════════════════════════════════════ */
-    .application {
-      background: #F4F4F5;
-      padding: 10rem 2rem;
-    }
-
-    .application-inner {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .application-header {
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-
-    .application-header h2 {
-      font-size: 48px;
-      color: #111827;
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.01em;
-    }
-
-    .application-header p {
-      font-family: 'Inter', sans-serif;
-      font-size: 17px;
-      color: #6B7280;
-      line-height: 1.7;
-      font-weight: 300;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .application-layout {
+    .hero .container {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 4rem;
-      align-items: start;
+      align-items: center;
     }
 
-    /* Founder portrait — black & white */
-    .founder-portrait {
-      width: 100%;
-      aspect-ratio: 3 / 4;
-      object-fit: cover;
-      object-position: center top;
-      filter: grayscale(100%);
+    .hero-text .eyebrow {
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 {
+      font-size: 44px;
+      font-weight: 700;
+      color: #1F456E;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      color: #4B5563;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      max-width: 520px;
+    }
+
+    .hero-bullets {
+      list-style: none;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-bullets li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.6rem;
+      font-size: 16px;
+      color: #111827;
+    }
+
+    .hero-bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 8px;
+      height: 8px;
+      background: #F59E0B;
+      border-radius: 50%;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      font-size: 15px;
+      font-weight: 600;
+      color: #FFFFFF;
+      background: #F59E0B;
+      padding: 14px 32px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: #D97706;
+    }
+
+    .hero-secondary {
       display: block;
+      margin-top: 1rem;
+      font-size: 14px;
+      color: #6B7280;
+    }
+
+    .hero-secondary a {
+      color: #1F456E;
+      text-decoration: underline;
+    }
+
+    .hero-graphic {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #F4F4F5;
+      border-radius: 12px;
+      min-height: 360px;
+      border: 1px solid #E5E7EB;
+    }
+
+    .hero-graphic-placeholder {
+      font-size: 14px;
+      color: #9CA3AF;
+      text-align: center;
+    }
+
+    /* ── 2. PROBLEM ───────────────────────────────── */
+    .problem-list {
+      list-style: none;
+      max-width: 680px;
+    }
+
+    .problem-list li {
+      position: relative;
+      padding-left: 2rem;
+      margin-bottom: 1.25rem;
+      font-size: 16px;
+      color: #374151;
+      line-height: 1.7;
+    }
+
+    .problem-list li::before {
+      content: '✕';
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-size: 16px;
+      font-weight: 700;
+      color: #EF4444;
+    }
+
+    /* ── 3. HOW IT WORKS ──────────────────────────── */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .step {
+      background: #F4F4F5;
+      border-radius: 10px;
+      padding: 2rem;
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: #1F456E;
+      color: #FFFFFF;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 50%;
+      margin-bottom: 1.25rem;
+    }
+
+    .step h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1F456E;
+      margin-bottom: 0.75rem;
+    }
+
+    .step p {
+      font-size: 15px;
+      color: #4B5563;
+      line-height: 1.7;
+    }
+
+    .steps-note {
+      font-size: 14px;
+      color: #6B7280;
+      font-style: italic;
+    }
+
+    /* ── 4. WHAT'S INCLUDED ───────────────────────── */
+    .included-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+
+    .included-card {
+      background: #FFFFFF;
+      border-radius: 10px;
+      padding: 2rem;
+      border: 1px solid #E5E7EB;
+    }
+
+    .included-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1F456E;
+      margin-bottom: 1rem;
+    }
+
+    .included-card ul {
+      list-style: none;
+    }
+
+    .included-card li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 15px;
+      color: #374151;
+      line-height: 1.6;
+    }
+
+    .included-card li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-weight: 700;
+      color: #F59E0B;
+    }
+
+    .included-note {
+      margin-top: 2rem;
+      font-size: 14px;
+      color: #6B7280;
+      font-style: italic;
+    }
+
+    /* ── 5. WHO IT'S FOR ──────────────────────────── */
+    .fit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .fit-col h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .fit-col.good h3 { color: #059669; }
+    .fit-col.bad h3 { color: #6B7280; }
+
+    .fit-col ul {
+      list-style: none;
+    }
+
+    .fit-col li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.6rem;
+      font-size: 15px;
+      color: #374151;
+      line-height: 1.6;
+    }
+
+    .fit-col.good li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-weight: 700;
+      color: #059669;
+    }
+
+    .fit-col.bad li::before {
+      content: '✕';
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-weight: 700;
+      color: #9CA3AF;
+    }
+
+    .expectations {
+      max-width: 680px;
+      font-size: 15px;
+      color: #4B5563;
+      line-height: 1.7;
+      border-top: 1px solid #E5E7EB;
+      padding-top: 2rem;
+    }
+
+    /* ── 6. ABOUT ─────────────────────────────────── */
+    .about-content {
+      max-width: 680px;
+    }
+
+    .about-content p {
+      font-size: 16px;
+      color: #374151;
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+
+    /* ── 7. CONTACT / CTA ─────────────────────────── */
+    .cta-section .container {
+      max-width: 680px;
+      text-align: center;
+    }
+
+    .cta-section .section-heading {
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-section .section-intro {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-section .btn-primary {
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-form {
+      text-align: left;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
     }
 
     .form-group {
-      margin-bottom: 1.2rem;
+      margin-bottom: 0.75rem;
     }
 
     .form-group input,
     .form-group textarea {
       width: 100%;
-      background: #FFFFFF;
+      background: #F4F4F5;
       border: 1px solid #E5E7EB;
-      border-radius: 0;
+      border-radius: 6px;
       color: #111827;
       font-family: 'Inter', sans-serif;
-      font-size: 16px;
-      font-weight: 300;
-      padding: 12px 16px;
-      min-height: 48px;
+      font-size: 15px;
+      padding: 12px 14px;
       outline: none;
-      transition: border-color 0.3s ease;
+      transition: border-color 0.2s ease;
       -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
     }
 
     .form-group input::placeholder,
@@ -507,414 +484,333 @@
     }
 
     .form-group textarea {
-      resize: none;
-      min-height: auto;
-      height: auto;
+      resize: vertical;
+      min-height: 100px;
     }
 
-    .form-submit-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .form-submit {
       width: 100%;
       font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+      font-size: 15px;
+      font-weight: 600;
       color: #FFFFFF;
       background: #F59E0B;
       border: none;
-      border-radius: 0;
-      height: 52px;
+      border-radius: 6px;
+      padding: 14px;
       cursor: pointer;
-      margin-top: 1.5rem;
-      transition: background 0.3s ease;
+      transition: background 0.2s ease;
+      margin-top: 0.5rem;
     }
 
-    .form-submit-btn:hover {
+    .form-submit:hover {
       background: #D97706;
-    }
-
-    .form-disclaimer {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      color: #6B7280;
-      text-align: center;
-      margin-top: 2rem;
     }
 
     .form-success {
       display: none;
       text-align: center;
-      padding: 4rem 0;
+      padding: 2rem 0;
     }
 
     .form-success.active {
       display: block;
     }
 
-    .form-success h3 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 24px;
-      font-weight: 400;
-      color: #111827;
-      line-height: 1.4;
-      max-width: 500px;
-      margin: 0 auto;
+    .form-success p {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1F456E;
     }
 
-    /* ═══════════════════════════════════════════════
-       SECTION 06 — FOOTER
-       ═══════════════════════════════════════════════ */
+    /* ── FOOTER ───────────────────────────────────── */
     .footer {
-      background: #F4F4F5;
-      padding: 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      background: #1F456E;
+      padding: 2rem;
+      text-align: center;
     }
 
     .footer span {
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      font-weight: 400;
-      color: #6B7280;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
     }
 
-    /* ═══════════════════════════════════════════════
-       RESPONSIVE — TABLET
-       ═══════════════════════════════════════════════ */
+    .footer a {
+      color: rgba(255, 255, 255, 0.9);
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── RESPONSIVE — TABLET ─────────────────────── */
     @media (max-width: 900px) {
+      .hero .container {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
       .hero h1 {
-        font-size: 56px;
+        font-size: 36px;
       }
 
-      .problem h2 {
-        font-size: 40px;
+      .hero-graphic {
+        min-height: 240px;
       }
 
-      .application-header h2 {
-        font-size: 40px;
-      }
-
-      .changes-grid {
+      .steps {
         grid-template-columns: 1fr;
-        gap: 0;
+        gap: 1.5rem;
       }
 
-      .changes-block {
-        padding: 2.5rem 0;
-        border-top: 1px solid #E5E7EB;
-      }
-
-      .changes-block:last-child {
-        padding-bottom: 0;
-      }
-
-      .rebuild-grid {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-
-      .rebuild-block {
-        padding: 2.5rem 0;
-        border-top: 1px solid #E5E7EB;
-      }
-
-      .rebuild-block:last-child {
-        padding-bottom: 0;
-      }
-
-      .results-grid {
-        flex-direction: column;
-        align-items: center;
-        gap: 3rem;
-      }
-
-      .results-stat {
-        padding: 0;
-        border-right: none !important;
-      }
-
-      .results-number {
-        font-size: 56px;
-      }
-
-      .application-layout {
+      .included-grid {
         grid-template-columns: 1fr;
       }
 
-      .portrait-placeholder {
-        max-width: 400px;
-        margin: 0 auto;
+      .fit-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-heading {
+        font-size: 30px;
       }
     }
 
-    /* ═══════════════════════════════════════════════
-       RESPONSIVE — MOBILE
-       ═══════════════════════════════════════════════ */
+    /* ── RESPONSIVE — MOBILE ─────────────────────── */
     @media (max-width: 600px) {
       .nav {
-        padding: 1.5rem 1.5rem;
+        padding: 1rem 1.25rem;
       }
 
-      .nav.scrolled {
-        padding: 1rem 1.5rem;
+      .section {
+        padding: 4rem 1.25rem;
       }
 
       .hero {
-        padding: 6rem 1.5rem;
+        padding: 6rem 1.25rem 4rem;
       }
 
       .hero h1 {
-        font-size: 42px;
+        font-size: 30px;
       }
 
       .hero-sub {
         font-size: 16px;
       }
 
-      .problem {
-        padding: 7rem 1.5rem;
+      .section-heading {
+        font-size: 26px;
       }
 
-      .problem h2 {
-        font-size: 36px;
-      }
-
-      .changes {
-        padding: 7rem 1.5rem;
-      }
-
-      .rebuild {
-        padding: 7rem 1.5rem;
-      }
-
-      .results {
-        padding: 7rem 1.5rem;
-      }
-
-      .results-number {
-        font-size: 48px;
-      }
-
-      .application {
-        padding: 7rem 1.5rem;
-      }
-
-      .application-header h2 {
-        font-size: 36px;
+      .form-row {
+        grid-template-columns: 1fr;
       }
 
       .footer {
-        padding: 2rem 1.5rem;
+        padding: 1.5rem 1.25rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- ═══════════════════════════════════════════════
-       NAVIGATION
-       ═══════════════════════════════════════════════ -->
-  <nav class="nav" id="nav">
-    <a href="#" class="nav-logo">Full Capacity</a>
-    <a href="#application" class="nav-apply">Apply</a>
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="#" class="nav-logo">FullCapacity</a>
+    <a href="mailto:ethan@fullcapacity.io" class="nav-cta">Book a call</a>
   </nav>
 
-  <!-- ═══════════════════════════════════════════════
-       SECTION 01 — HERO
-       ═══════════════════════════════════════════════ -->
+  <!-- 1. HERO -->
   <section class="hero" id="hero">
-    <div class="hero-bg"><canvas id="heroCanvas"></canvas></div>
-    <div class="hero-content">
-      <div class="hero-preheader reveal">By application only</div>
-      <h1 class="reveal reveal-d1">Your firm has a ceiling. We remove it.</h1>
-      <p class="hero-sub reveal reveal-d2">Full Capacity rebuilds how professional services firms operate &mdash; so every partner, every hour, and every operating model performs at maximum.</p>
-      <p class="hero-sub reveal reveal-d3" style="margin-bottom: 3rem;">We work with mid-size law firms, accountancies, and professional services practices between 20 and 200 people.</p>
-      <a href="#application" class="cta-btn reveal reveal-d4">Apply for access</a>
-      <div class="hero-footnote reveal reveal-d5">We work with twelve firms at a time.</div>
+    <div class="container">
+      <div class="hero-text">
+        <div class="eyebrow reveal">For plumbing &amp; HVAC companies</div>
+        <h1 class="reveal">Stop losing jobs to missed calls and messy scheduling.</h1>
+        <p class="hero-sub reveal">FullCapacity installs a &ldquo;never&#8209;miss&#8209;a&#8209;job&rdquo; system that turns more enquiries into booked jobs and cuts your admin time&nbsp;&mdash; using the tools you already have.</p>
+        <ul class="hero-bullets reveal">
+          <li>Capture every call, form and message in one place.</li>
+          <li>Respond fast so people don&rsquo;t go to the next Google result.</li>
+          <li>Turn qualified enquiries into jobs and quotes automatically.</li>
+        </ul>
+        <a href="mailto:ethan@fullcapacity.io" class="btn-primary reveal">Book a 15-minute call</a>
+        <span class="hero-secondary reveal">Or email <a href="mailto:ethan@fullcapacity.io">ethan@fullcapacity.io</a></span>
+      </div>
+      <div class="hero-graphic reveal">
+        <div class="hero-graphic-placeholder">Illustration placeholder</div>
+      </div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════
-       SECTION 02 — THE PROBLEM
-       ═══════════════════════════════════════════════ -->
-  <section class="problem" id="problem">
-    <div class="problem-inner">
-      <div class="section-label reveal">The problem</div>
-      <h2 class="reveal reveal-d1">Most firms operate at a fraction of their capacity.</h2>
-      <p class="reveal reveal-d2">Partners built to generate revenue are buried in operations. Associates with years of training are tangled in process. The operating model that got your firm here is now the ceiling that's keeping you there.</p>
-      <p class="reveal reveal-d3">You feel it. The ceiling isn't in the market. It's inside the firm.</p>
+  <!-- 2. PROBLEM -->
+  <section class="section bg-grey" id="problem">
+    <div class="container">
+      <div class="eyebrow reveal">Why you&rsquo;re losing jobs</div>
+      <h2 class="section-heading reveal">Why plumbing &amp; HVAC companies lose profitable work</h2>
+      <p class="section-intro reveal">Most plumbing and heating businesses don&rsquo;t need more leads. They need to stop good enquiries slipping through the cracks and make it easier to book the jobs they already get.</p>
+      <ul class="problem-list">
+        <li class="reveal">You miss calls when you&rsquo;re on a job, and those people phone the next company on Google.</li>
+        <li class="reveal">Messages come in via website forms, WhatsApp and Facebook, but you don&rsquo;t have one place to see and answer them.</li>
+        <li class="reveal">Jobs get written down on bits of paper or spread across calendars, so things get double-booked or forgotten.</li>
+        <li class="reveal">Quotes are sent but not chased, so warm prospects quietly disappear.</li>
+      </ul>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════
-       SECTION 03 — WHAT CHANGES
-       ═══════════════════════════════════════════════ -->
-  <section class="changes" id="changes">
-    <div class="changes-inner">
-      <div class="section-label reveal">What changes</div>
-      <div class="changes-grid">
-        <div class="changes-block reveal reveal-d1">
-          <div class="changes-block-num">01</div>
-          <h3>We map the constraint</h3>
-          <p>Every firm has a bottleneck where capacity bleeds. We find it.</p>
+  <!-- 3. HOW IT WORKS -->
+  <section class="section bg-white" id="how-it-works">
+    <div class="container">
+      <div class="eyebrow reveal">How it works</div>
+      <h2 class="section-heading reveal">How the &ldquo;never-miss-a-job&rdquo; system works</h2>
+      <p class="section-intro reveal">We keep your existing tools. We fix how they work together.</p>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step-number">1</div>
+          <h3>We map your current process</h3>
+          <p>In a 60-minute call, we walk through how calls, messages, jobs and quotes are handled today, and where things are getting dropped.</p>
         </div>
-        <div class="changes-block reveal reveal-d2">
-          <div class="changes-block-num">02</div>
-          <h3>We rebuild the model</h3>
-          <p>Structure, roles, rhythms, decision flow &mdash; redesigned to run at maximum.</p>
+        <div class="step reveal">
+          <div class="step-number">2</div>
+          <h3>We build and install your system (in 21 days)</h3>
+          <p>We connect your phones, forms and messages into one flow, standardise responses, and set up automatic job creation, quoting and follow-up in the tools you already use.</p>
         </div>
-        <div class="changes-block reveal reveal-d3">
-          <div class="changes-block-num">03</div>
-          <h3>You operate at full capacity</h3>
-          <p>Partners return to revenue. The firm runs the way it should.</p>
+        <div class="step reveal">
+          <div class="step-number">3</div>
+          <h3>You get more booked jobs with less admin</h3>
+          <p>From there, we monitor and tweak things each month so you keep improving: faster responses, a cleaner diary, more quotes accepted.</p>
         </div>
       </div>
-      <p class="reveal reveal-d4" style="font-family: 'Inter', sans-serif; font-size: 15px; color: #6B7280; font-weight: 300; line-height: 1.7; text-align: center; max-width: 700px; margin: 4rem auto 0;">This is operational restructuring. Not consulting. Not software. We embed inside your firm, map where capacity is bleeding, and rebuild the model that runs it.</p>
+      <p class="steps-note reveal">No new software to learn. No need to change CRM or job-management tools.</p>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════
-       SECTION — WHAT WE REBUILD
-       ═══════════════════════════════════════════════ -->
-  <section class="rebuild" id="rebuild">
-    <div class="rebuild-inner">
-      <div class="section-label reveal">What we rebuild</div>
-      <div class="rebuild-grid">
-        <div class="rebuild-block reveal reveal-d1">
-          <h3>The pattern</h3>
-          <p>Senior people doing junior work. Operational drag buried inside billable time. Capacity lost to processes no one has questioned in years.</p>
+  <!-- 4. WHAT'S INCLUDED -->
+  <section class="section bg-grey" id="whats-included">
+    <div class="container">
+      <div class="eyebrow reveal">What you get</div>
+      <h2 class="section-heading reveal">What&rsquo;s included</h2>
+      <p class="section-intro reveal">A done-for-you system that quietly runs in the background and just makes your office work better.</p>
+      <div class="included-grid">
+        <div class="included-card reveal">
+          <h3>Lead capture &amp; response</h3>
+          <ul>
+            <li>Every enquiry from phone/voicemail, website forms and WhatsApp/Facebook is logged in one place.</li>
+            <li>A fast, standard reply goes out 24/7 so people know you&rsquo;ve got their message and what happens next.</li>
+          </ul>
         </div>
-        <div class="rebuild-block reveal reveal-d2">
-          <h3>The rebuild</h3>
-          <p>We restructure how work is allocated, executed, and delivered. Your systems, redesigned so fee earners do the work they were hired for.</p>
+        <div class="included-card reveal">
+          <h3>Job creation &amp; scheduling</h3>
+          <ul>
+            <li>Qualified enquiries automatically become jobs in your existing diary or job-management software.</li>
+            <li>Simple rules for emergency vs normal jobs mean fewer double-bookings and forgotten visits.</li>
+          </ul>
         </div>
-        <div class="rebuild-block reveal reveal-d3">
-          <h3>Your environment</h3>
-          <p>Built entirely within your existing infrastructure. Your clients&rsquo; matters, your data, your IP &mdash; nothing leaves. No platform. No migration.</p>
+        <div class="included-card reveal">
+          <h3>Quote drafting &amp; follow-up</h3>
+          <ul>
+            <li>We help you standardise quote templates for your most common jobs.</li>
+            <li>Quotes are logged and automatic follow-ups go out after a few days if you haven&rsquo;t heard back.</li>
+          </ul>
+        </div>
+        <div class="included-card reveal">
+          <h3>Simple weekly summary</h3>
+          <ul>
+            <li>Each week you get a short summary: enquiries, response times, jobs booked, quotes sent and quotes won.</li>
+          </ul>
         </div>
       </div>
-      <p class="rebuild-result reveal reveal-d4">The result: partners reclaim their time, junior staff operate at a higher level, and your firm runs closer to its actual capacity than it ever has.</p>
+      <p class="included-note reveal">As we work together, we can add extras like review requests and service reminders.</p>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════
-       SECTION 04 — RESULTS
-       ═══════════════════════════════════════════════ -->
-  <section class="results" id="results">
-    <div class="results-inner">
-      <div class="section-label reveal">Results</div>
-      <div class="results-grid">
-        <div class="results-stat reveal reveal-d1">
-          <div class="results-number">37%</div>
-          <div class="results-desc">average increase in partner-facing hours within 90 days</div>
+  <!-- 5. WHO IT'S FOR -->
+  <section class="section bg-white" id="who-its-for">
+    <div class="container">
+      <div class="eyebrow reveal">Is it right for you?</div>
+      <h2 class="section-heading reveal">Is FullCapacity a fit for you?</h2>
+      <div class="fit-grid">
+        <div class="fit-col good reveal">
+          <h3>Best fit if&hellip;</h3>
+          <ul>
+            <li>You run a plumbing or HVAC business with 3&ndash;50 engineers.</li>
+            <li>You get a steady flow of enquiries but know you miss calls or forget to chase people.</li>
+            <li>You&rsquo;d like your office to run smoother without hiring more staff or changing all your software.</li>
+          </ul>
         </div>
-        <div class="results-stat reveal reveal-d2">
-          <div class="results-number">87</div>
-          <div class="results-desc">NPS — average client satisfaction score across all engagements</div>
-        </div>
-        <div class="results-stat reveal reveal-d3">
-          <div class="results-number">12</div>
-          <div class="results-desc">firms at a time. No more.</div>
+        <div class="fit-col bad reveal">
+          <h3>Probably not a fit if&hellip;</h3>
+          <ul>
+            <li>You don&rsquo;t have any online presence or phone enquiries yet.</li>
+            <li>You&rsquo;re not willing to change how you handle jobs at all.</li>
+          </ul>
         </div>
       </div>
-      <p class="reveal reveal-d4" style="font-family: 'Inter', sans-serif; font-size: 14px; color: #6B7280; font-weight: 300; line-height: 1.6; text-align: center; max-width: 600px; margin: 3rem auto 0;">A typical engagement runs 8 to 12 weeks. Most firms see measurable change within the first 30 days.</p>
+      <p class="expectations reveal">Most of the impact comes from doing the basics extremely well: capturing every enquiry, replying quickly, logging jobs properly and following up quotes. The system doesn&rsquo;t create leads from nowhere&nbsp;&mdash; it helps you turn more of your existing enquiries into profitable work.</p>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════
-       SECTION 05 — APPLICATION GATE
-       ═══════════════════════════════════════════════ -->
-  <section class="application" id="application">
-    <div class="application-inner">
-      <div class="application-header">
-        <div class="section-label reveal">Apply</div>
-        <h2 class="reveal reveal-d1">Is your firm ready?</h2>
-        <p class="reveal reveal-d2" style="font-family: 'Playfair Display', Georgia, serif; font-size: 20px; color: #111827; font-weight: 400; line-height: 1.5; max-width: 600px; margin: 0 auto 1.5rem;">We work with law firms, accountancies, and professional services practices that are ready to operate differently.</p>
-        <p class="reveal reveal-d3">Full Capacity works with twelve firms at a time. Applications are reviewed within 48 hours.</p>
+  <!-- 6. ABOUT -->
+  <section class="section bg-grey" id="about">
+    <div class="container">
+      <div class="eyebrow reveal">About</div>
+      <h2 class="section-heading reveal">Who&rsquo;s behind FullCapacity</h2>
+      <div class="about-content">
+        <p class="reveal">FullCapacity is run by Ethan Pearsall, a developer and operator based in the UK.</p>
+        <p class="reveal">After building and running software products, Ethan now focuses on one thing: helping trades businesses plug the leaks in their day-to-day operations so the jobs they&rsquo;re already generating don&rsquo;t go to waste.</p>
+        <p class="reveal">No jargon, no big consulting decks&nbsp;&mdash; just practical systems that make you more money and give you your time back.</p>
       </div>
+    </div>
+  </section>
 
-      <div class="application-layout reveal reveal-d4">
-        <img src="IMG_0558.jpeg" alt="Founder portrait" class="founder-portrait">
+  <!-- 7. CONTACT / CTA -->
+  <section class="section bg-white cta-section" id="contact">
+    <div class="container">
+      <div class="eyebrow reveal">Let&rsquo;s talk</div>
+      <h2 class="section-heading reveal">Want to see if this would actually help your business?</h2>
+      <p class="section-intro reveal">If you&rsquo;re running a plumbing or HVAC company and want to stop losing jobs to missed calls and messy scheduling, let&rsquo;s talk. We&rsquo;ll spend 15 minutes looking at how you handle enquiries today and I&rsquo;ll tell you honestly whether a &ldquo;never-miss-a-job&rdquo; system is worth it for you.</p>
+      <a href="mailto:ethan@fullcapacity.io" class="btn-primary reveal">Book a 15-minute call</a>
 
-        <div class="application-form-wrap">
-          <form id="applicationForm" autocomplete="off" novalidate>
+      <div class="contact-form reveal" id="contactFormWrap">
+        <form id="contactForm" autocomplete="off" novalidate>
+          <div class="form-row">
             <div class="form-group">
-              <input type="text" id="firmName" name="firmName" placeholder="Firm name" required>
+              <input type="text" name="name" placeholder="Name" required>
             </div>
             <div class="form-group">
-              <input type="text" id="nameRole" name="nameRole" placeholder="Your name and role" required>
+              <input type="text" name="company" placeholder="Company" required>
             </div>
-            <div class="form-group">
-              <input type="text" id="partners" name="partners" placeholder="Number of partners" required>
-            </div>
-            <div class="form-group">
-              <textarea id="interest" name="interest" rows="3" placeholder="What prompted your interest?"></textarea>
-            </div>
-            <div class="form-group">
-              <input type="email" id="email" name="email" placeholder="Email address" required>
-            </div>
-            <button type="submit" class="form-submit-btn">Submit application</button>
-            <div class="form-disclaimer">All applications are confidential.</div>
-          </form>
-
-          <div class="form-success" id="formSuccess">
-            <h3>Your application has been received. We review all submissions within 48 hours.</h3>
           </div>
-        </div>
+          <div class="form-row">
+            <div class="form-group">
+              <input type="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+              <input type="tel" name="phone" placeholder="Phone">
+            </div>
+          </div>
+          <div class="form-group">
+            <textarea name="message" placeholder="Message" rows="4"></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send message</button>
+        </form>
+      </div>
+
+      <div class="form-success" id="formSuccess">
+        <p>Thanks! We&rsquo;ll be in touch within 48 hours.</p>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════
-       SECTION 06 — FOOTER
-       ═══════════════════════════════════════════════ -->
+  <!-- FOOTER -->
   <footer class="footer">
-    <span>&copy; 2026 Full Capacity</span>
-    <span>fullcapacity.io</span>
+    <span>&copy; 2026 FullCapacity &middot; <a href="mailto:ethan@fullcapacity.io">ethan@fullcapacity.io</a></span>
   </footer>
 
-  <!-- ═══════════════════════════════════════════════
-       JAVASCRIPT
-       ═══════════════════════════════════════════════ -->
   <script>
     (function () {
       'use strict';
 
-      /* ── Nav scroll state ───────────────────────── */
-      var nav = document.getElementById('nav');
-
-      function updateNav() {
-        if (window.scrollY > 60) {
-          nav.classList.add('scrolled');
-        } else {
-          nav.classList.remove('scrolled');
-        }
-      }
-
-      window.addEventListener('scroll', updateNav, { passive: true });
-      updateNav();
-
-      /* ── Smooth scroll for anchor links ─────────── */
-      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
-        a.addEventListener('click', function (e) {
-          e.preventDefault();
-          var href = this.getAttribute('href');
-          if (href === '#') return;
-          var target = document.querySelector(href);
-          if (target) {
-            window.scrollTo({
-              top: target.getBoundingClientRect().top + window.pageYOffset,
-              behavior: 'smooth'
-            });
-          }
-        });
-      });
-
-      /* ── Scroll reveal — subtle upward fade ─────── */
+      /* ── Scroll reveal ─────────────────────────── */
       var reveals = document.querySelectorAll('.reveal');
 
       function checkReveal() {
@@ -930,99 +826,40 @@
       window.addEventListener('resize', checkReveal, { passive: true });
       setTimeout(checkReveal, 100);
 
+      /* ── Smooth scroll for anchor links ─────────── */
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          var href = this.getAttribute('href');
+          if (href === '#') return;
+          var target = document.querySelector(href);
+          if (target) {
+            window.scrollTo({
+              top: target.getBoundingClientRect().top + window.pageYOffset - 70,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+
       /* ── Form handling ──────────────────────────── */
-      var form = document.getElementById('applicationForm');
+      var form = document.getElementById('contactForm');
+      var formWrap = document.getElementById('contactFormWrap');
       var success = document.getElementById('formSuccess');
 
       form.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        var firmName = document.getElementById('firmName').value.trim();
-        var nameRole = document.getElementById('nameRole').value.trim();
-        var partners = document.getElementById('partners').value.trim();
-        var email = document.getElementById('email').value.trim();
+        var name = form.querySelector('[name="name"]').value.trim();
+        var email = form.querySelector('[name="email"]').value.trim();
 
-        if (!firmName || !nameRole || !partners || !email) return;
+        if (!name || !email) return;
 
-        form.style.display = 'none';
+        formWrap.style.display = 'none';
         success.classList.add('active');
         success.scrollIntoView({ behavior: 'smooth', block: 'center' });
       });
     })();
   </script>
-
-<script>
-(function() {
-  var c = document.getElementById('heroCanvas');
-  var w = c.width = 960;
-  var h = c.height = 540;
-  var ctx = c.getContext('2d');
-
-  // Perlin-like noise using layered random passes
-  var imgData = ctx.createImageData(w, h);
-  var d = imgData.data;
-
-  // Create multiple noise octaves and blend
-  function noise(scale, weight) {
-    var buf = new Float32Array(w * h);
-    // Create coarse grid and interpolate
-    var gw = Math.ceil(w / scale) + 2;
-    var gh = Math.ceil(h / scale) + 2;
-    var grid = new Float32Array(gw * gh);
-    for (var i = 0; i < grid.length; i++) grid[i] = Math.random();
-    for (var y = 0; y < h; y++) {
-      for (var x = 0; x < w; x++) {
-        var gx = x / scale;
-        var gy = y / scale;
-        var ix = Math.floor(gx);
-        var iy = Math.floor(gy);
-        var fx = gx - ix;
-        var fy = gy - iy;
-        // Smoothstep
-        fx = fx * fx * (3 - 2 * fx);
-        fy = fy * fy * (3 - 2 * fy);
-        var a = grid[iy * gw + ix];
-        var b = grid[iy * gw + ix + 1];
-        var cc = grid[(iy + 1) * gw + ix];
-        var dd = grid[(iy + 1) * gw + ix + 1];
-        var val = a + (b - a) * fx + (cc - a) * fy + (a - b - cc + dd) * fx * fy;
-        buf[y * w + x] += val * weight;
-      }
-    }
-    return buf;
-  }
-
-  // Layer multiple octaves for marble-like texture
-  var n1 = noise(200, 0.5);
-  var n2 = noise(80, 0.25);
-  var n3 = noise(30, 0.15);
-  var n4 = noise(8, 0.08);
-  var n5 = noise(3, 0.04);
-
-  for (var i = 0; i < w * h; i++) {
-    var val = n1[i] + n2[i] + n3[i] + n4[i] + n5[i];
-
-    // Create marble veining using sin of the noise
-    var marble = Math.sin(val * 12 + (n1[i] * 20)) * 0.5 + 0.5;
-    marble = Math.pow(marble, 0.6);
-
-    // Map to blue range for brand-coloured stone look
-    var base = marble * 0.4 + 0.3;
-
-    // Add fine grain noise
-    var grain = (Math.random() - 0.5) * 0.05;
-    base = Math.max(0.15, Math.min(0.85, base + grain));
-
-    // Blue tones based on #1F456E (r:31, g:69, b:110)
-    var idx = i * 4;
-    d[idx]     = Math.floor(31 * base);
-    d[idx + 1] = Math.floor(69 * base);
-    d[idx + 2] = Math.floor(110 * base);
-    d[idx + 3] = 255;
-  }
-
-  ctx.putImageData(imgData, 0, 0);
-})();
-</script>
 </body>
 </html>
